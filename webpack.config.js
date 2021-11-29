@@ -2,9 +2,13 @@ const path = require("path");
 const fs = require("fs");
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+// To read HTML file
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+// To minimize the imageSS
 const ImageMinPlugin = require("imagemin-webpack-plugin").default;
+// To minify css
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// To clean the webpack everytime we reload the page
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const environment = require("./configs/env");
@@ -85,6 +89,14 @@ module.exports = {
         {
           from: path.resolve(environment.paths.source, "images", "content"),
           to: path.resolve(environment.paths.output, "images", "content"),
+          toType: "dir",
+          globOptions: {
+            ignore: ["*.DS_Store", "Thumbs.db"],
+          },
+        },
+        {
+          from: path.resolve(environment.paths.source, "images", "design"),
+          to: path.resolve(environment.paths.output, "images", "design"),
           toType: "dir",
           globOptions: {
             ignore: ["*.DS_Store", "Thumbs.db"],
