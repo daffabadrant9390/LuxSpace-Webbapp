@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Playfair+Display:wght@400;500;600&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -40,12 +40,60 @@
     background-size: 37.5%;
   }
 
+  /* Card */
   .card .card-shadow {
     @apply shadow-none transition duration-300 h-full;
   }
 
   .card:hover .card-shadow {
     @apply shadow-lg;
+  }
+
+  /* Breadcrumb */
+  ul.breadcrumb {
+    @apply flex flex-row items-center text-lg;
+  }
+
+  ul.breadcrumb li:not(:last-child)::after {
+    content: "/";
+    @apply px-4;
+  }
+
+  ul.breadcrumb li:not(:last-child) a {
+    @apply font-light;
+  }
+
+  ul.breadcrumb li:last-child a {
+    @apply font-semibold;
+  }
+
+  /* Slider for Image Details Preview */
+  .slider {
+    @apply flex flex-col my-4;
+  }
+
+  .slider .thumbnail {
+    @apply w-screen flex order-last -mx-2 pl-4 overflow-auto;
+  }
+
+  .slider .thumbnail .item {
+    @apply rounded-lg bg-gray-100 relative mb-4 cursor-pointer;
+    width: 106px;
+    height: 106px;
+  }
+
+  .slider .thumbnail .item::after {
+    content: "";
+    @apply transition duration-200 absolute inset-0 bg-black bg-opacity-0 border-2 border-black border-opacity-0 rounded-lg;
+  }
+
+  .slider .thumbnail .item.selected::after {
+    @apply bg-opacity-25 border-opacity-100;
+  }
+
+  .slider .preview {
+    @apply px-4 mb-4;
+    /* height: 320px; */
   }
 }
 
@@ -58,6 +106,20 @@
   .hero .hero-cta {
     @apply w-20 h-20 -translate-x-1/2 -translate-y-1/2;
     background-size: auto;
+  }
+
+  /* Slider for Image Details Preview: Medium Screen */
+  .slider {
+    @apply flex-row;
+  }
+
+  .slider .thumbnail {
+    @apply w-auto order-first block overflow-visible pl-0;
+  }
+
+  .slider .preview {
+    height: 609px;
+    width: 560px;
   }
 }
 
@@ -78,4 +140,8 @@ a.cart g circle.dot {
 
 a.cart.cart-filled g circle.dot {
   @apply block;
+}
+
+button[disabled] {
+  @apply bg-gray-300 hover:bg-gray-300 text-gray-400 hover:text-gray-400 cursor-not-allowed;
 }
